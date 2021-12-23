@@ -1,19 +1,31 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Screens
 import HomeScreen from './screens/HomeScreen';
 import LibraryScreen from './screens/LibraryScreen';
 import DownloadsScreen from './screens/DownloadsScreen';
+import BookDetailsScreen from './screens/BookDetailsScreen';
+
 
 //Screen names
 const homeName = "Home";
 const libraryName = "Library";
 const downloadsName = "Downloads";
+const bookDetailsName = "Details"
 
 const Tab = createBottomTabNavigator();
+const HomeStack = createStackNavigator();
+
+const HomeStackScreen = () => (
+  <HomeStack.Navigator>
+    <HomeStack.Screen name={"Home"} component= {HomeScreen}/>
+    <HomeStack.Screen name={bookDetailsName} component = {BookDetailsScreen}/>
+  </HomeStack.Navigator>
+);
 
 function MainContainer() {
   return (
@@ -46,7 +58,7 @@ function MainContainer() {
           style: { padding: 10, height: 70}
         }}>
 
-        <Tab.Screen name={homeName} component={HomeScreen} />
+        <Tab.Screen name={homeName} component={HomeStackScreen} options={{title: "Home", headerShown:false}}/>
         <Tab.Screen name={libraryName} component={LibraryScreen} />
         <Tab.Screen name={downloadsName} component={DownloadsScreen} />
 
