@@ -19,13 +19,30 @@ const bookDetailsName = "Details"
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
+const LibraryStack = createStackNavigator();
+const DownloadsStack= createStackNavigator();
 
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
-    <HomeStack.Screen name={"Home"} component= {HomeScreen}/>
+    <HomeStack.Screen name={"Home "} component= {HomeScreen}/>
     <HomeStack.Screen name={bookDetailsName} component = {BookDetailsScreen}/>
   </HomeStack.Navigator>
 );
+
+const LibraryStackScreen = () => (
+  <LibraryStack.Navigator>
+    <LibraryStack.Screen name={"Library "} component= {LibraryScreen}/>
+    <LibraryStack.Screen name={bookDetailsName} component = {BookDetailsScreen}/>
+  </LibraryStack.Navigator>
+);
+
+const DownloadsStackScreen = () => (
+  <DownloadsStack.Navigator>
+    <DownloadsStack.Screen name={"Downloads "} component= {DownloadsScreen}/>
+    <DownloadsStack.Screen name={bookDetailsName} component = {BookDetailsScreen}/>
+  </DownloadsStack.Navigator>
+);
+
 
 function MainContainer() {
   return (
@@ -59,8 +76,8 @@ function MainContainer() {
         }}>
 
         <Tab.Screen name={homeName} component={HomeStackScreen} options={{title: "Home", headerShown:false}}/>
-        <Tab.Screen name={libraryName} component={LibraryScreen} />
-        <Tab.Screen name={downloadsName} component={DownloadsScreen} />
+        <Tab.Screen name={libraryName} component={LibraryStackScreen} options={{title: "Library", headerShown:false}}/>
+        <Tab.Screen name={downloadsName} component={DownloadsStackScreen} options={{title: "Downloads", headerShown:false}}/>
 
       </Tab.Navigator>
     </NavigationContainer>
