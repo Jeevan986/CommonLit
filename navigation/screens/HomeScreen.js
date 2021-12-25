@@ -28,7 +28,7 @@ export default function HomeScreen({ navigation }){
                     keyExtractor = {({id}, index) => "#"+ id }
                     renderItem = {({ item }) => (
                         <View style = {{width: '48%', alignItems:"center", margin: '1%', borderWidth:'0.75', padding: 15}}>
-                            <TouchableOpacity onPress={() => navigation.push("Details")} >
+                            <TouchableOpacity onPress={() => navigation.push("Details" , {book : item})} >
                                 <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={{width: 180, height: 250}}/>
                                 <Text numberOfLines={1} style = {{textAlign: 'center', fontWeight: 'bold'}}>{item.name} </Text>
                             </TouchableOpacity>  
