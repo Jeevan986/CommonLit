@@ -9,14 +9,17 @@ import HomeScreen from './screens/HomeScreen';
 import LibraryScreen from './screens/LibraryScreen';
 import DownloadsScreen from './screens/DownloadsScreen';
 import BookDetailsScreen from './screens/BookDetailsScreen';
+import quizScreen from './screens/quizScreen';
 
 
 //Screen names
-const homeName = "Home";
-const libraryName = "Library";
-const downloadsName = "Downloads";
-const bookDetailsName = "Details"
+const homeName = "Inicio";
+const libraryName = "Biblioteca";
+const downloadsName = "Descargar";
+const bookDetailsName = "Detalles";
+const quizScreenName = "Examen";
 
+//Tabs
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const LibraryStack = createStackNavigator();
@@ -24,21 +27,23 @@ const DownloadsStack= createStackNavigator();
 
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
-    <HomeStack.Screen name={"Home "} component= {HomeScreen}/>
+    <HomeStack.Screen name={"Inicio "} component= {HomeScreen}/>
     <HomeStack.Screen name={bookDetailsName} component = {BookDetailsScreen}/>
+    <HomeStack.Screen name={quizScreenName} component = {quizScreen}/>
   </HomeStack.Navigator>
 );
 
 const LibraryStackScreen = () => (
   <LibraryStack.Navigator>
-    <LibraryStack.Screen name={"Library "} component= {LibraryScreen}/>
+    <LibraryStack.Screen name={"Biblioteca "} component= {LibraryScreen}/>
     <LibraryStack.Screen name={bookDetailsName} component = {BookDetailsScreen}/>
+    <LibraryStack.Screen name={quizScreenName} component = {quizScreen}/>
   </LibraryStack.Navigator>
 );
 
 const DownloadsStackScreen = () => (
   <DownloadsStack.Navigator>
-    <DownloadsStack.Screen name={"Downloads "} component= {DownloadsScreen}/>
+    <DownloadsStack.Screen name={"Descargar "} component= {DownloadsScreen}/>
     <DownloadsStack.Screen name={bookDetailsName} component = {BookDetailsScreen}/>
   </DownloadsStack.Navigator>
 );
@@ -75,9 +80,9 @@ function MainContainer() {
           style: { padding: 10, height: 70}
         }}>
 
-        <Tab.Screen name={homeName} component={HomeStackScreen} options={{title: "Home", headerShown:false}}/>
-        <Tab.Screen name={libraryName} component={LibraryStackScreen} options={{title: "Library", headerShown:false}}/>
-        <Tab.Screen name={downloadsName} component={DownloadsStackScreen} options={{title: "Downloads", headerShown:false}}/>
+        <Tab.Screen name={homeName} component={HomeStackScreen} options={{title: "Inicio", headerShown:false}}/>
+        <Tab.Screen name={libraryName} component={LibraryStackScreen} options={{title: "Biblioteca", headerShown:false}}/>
+        <Tab.Screen name={downloadsName} component={DownloadsStackScreen} options={{title: "Descargar", headerShown:false}}/>
 
       </Tab.Navigator>
     </NavigationContainer>

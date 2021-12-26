@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, TextInput, ActivityIndicator,Image, ScrollView} from 'react-native';
-import { SafeAreaView} from 'react-native-safe-area-context';
-import { WebView } from 'react-native-webview';
 import HTMLView from 'react-native-htmlview';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -10,6 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 export default function BookDetailsScreen({ route, navigation }) {
     const [book, setBook]= useState(null);
     const [product, setProduct] = useState([]);
+    const [isPress, setPress] = useState(false);
     useEffect(()=> {
         let {book} = route.params;
         setBook(book)
@@ -22,25 +21,39 @@ export default function BookDetailsScreen({ route, navigation }) {
             .catch((error) => console.error(error))
         },[book]);
     
+    
     if (book){
         return (
             <View style={{ flex: 3, alignItems: 'center', margin: '2%', padding: 15}}>
-                <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={{width: 140, height: 200 , marginBottom: 5 }}/>
+                <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={{width: 130, height: 180 , marginBottom: 5 }}/>
                 <Text style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 2, textAlign: 'center'}}>{product.name}</Text>
-                <Text style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 2 }}>Author : {product.author}</Text>
-                <Text style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 2 }}> Genre : {product.genres}</Text>
-                <View style ={{flexDirection: 'row', borderWidth: 1, paddingVertical:2, margin: 5, borderRadius: 10, backgroundColor: 'rgba(0,0,0,0.2)'}}>
-                    <View style ={{flex :1, alignItems: 'center' }}>
-                        <Ionicons name="heart-outline" size={25}/>
-                        <Text> Favourite </Text>
+                <Text style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 2 }}>Autor : {product.author}</Text>
+                <Text style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 2 }}> Genres : {product.genres}</Text>
+                <Text style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 2 }}> Grado : {product.grade_level}</Text>
+                <View style ={{flexDirection: 'row',borderWidth: 1, borderRadius: 10, paddingVertical:2, margin: 5, backgroundColor: 'rgba(0,0,0,0.2)'}}>
+                    <View style ={{flex :1, alignItems: 'center', borderRightWidth: 1}}>
+                        <TouchableOpacity  style={{ alignItems: 'center'}} onPress={() => console.log("Favourite Pressed")}>
+                            <Ionicons name="heart-outline" size={25}/>
+                            <Text> Favorable </Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style ={{flex :1, alignItems: 'center' }}>
-                        <Ionicons name="download-outline"  size = {25}/>
-                        <Text>Download</Text>
+                    <View style ={{flex :1, alignItems: 'center',borderRightWidth: 1}}>
+                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => console.log("Download Pressed")}>
+                            <Ionicons name="download-outline"  size = {25}/>
+                            <Text>Descargar </Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style ={{flex :1, alignItems: 'center' }}>
-                        <Ionicons name="list-outline"  size = {25}/>
-                        <Text>Take Quiz</Text>
+                    <View style ={{flex :1, alignItems: 'center',borderRightWidth: 1}}>
+                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => console.log("Speak Pressed")}>
+                            <Ionicons name="volume-high-outline"  size = {25}/>
+                            <Text>Hablar</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style ={{flex :1, alignItems: 'center'}}>
+                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => navigation.push("Examen" , {products : product})}>
+                            <Ionicons name="list-outline"  size = {25}/>
+                            <Text>Examen</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style ={{borderWidth:'0.75', padding: 15, borderRadius: 10, flex: 1, padding: 7}}>
@@ -54,4 +67,16 @@ export default function BookDetailsScreen({ route, navigation }) {
         return(<></>)
     }
     
+}
+
+const styles={
+    btnNormal: {
+        alignItems: 'center',
+        flex: 1
+    },
+    btnPressed:{
+        backgroundColor: 'red',
+        alignItems: 'center',
+        flex:1
+    }
 }

@@ -5,8 +5,8 @@ export default function LibraryScreen({ navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text
-                onPress={() => navigation.push("Details")}
-                style={{ fontSize: 26, fontWeight: 'bold' }}>Library Screen</Text>
+                onPress={() => navigation.push("Detalles")}
+                style={{ fontSize: 26, fontWeight: 'bold' }}>Biblioteca Screen</Text>
         </View>
     );
 }
