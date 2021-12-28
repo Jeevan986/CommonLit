@@ -10,7 +10,6 @@ export default function LibraryScreen({ navigation }) {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData]= useState([]);
     const [search, setSearch]= useState('');
-    const [downloads, setDownloads]=useState([]);
     useEffect(() => {
         fetchBooks();
         return()=>{
