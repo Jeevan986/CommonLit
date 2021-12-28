@@ -21,6 +21,10 @@ export default function BookDetailsScreen({ route, navigation }) {
             .catch((error) => console.error(error))
         },[book]);
     
+    var downloads=[]
+    const addtodownloads=(element)=>{
+        downloads.push(element)
+    }
     
     if (book){
         return (
@@ -38,7 +42,7 @@ export default function BookDetailsScreen({ route, navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style ={{flex :1, alignItems: 'center',borderRightWidth: 1}}>
-                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => console.log("Download Pressed")}>
+                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => {addtodownloads(product);console.log("Download pressed");console.log(downloads)}}>
                             <Ionicons name="download-outline"  size = {25}/>
                             <Text>Descargar </Text>
                         </TouchableOpacity>

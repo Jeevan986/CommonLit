@@ -10,6 +10,7 @@ import LibraryScreen from './screens/LibraryScreen';
 import DownloadsScreen from './screens/DownloadsScreen';
 import BookDetailsScreen from './screens/BookDetailsScreen';
 import quizScreen from './screens/quizScreen';
+import downloadedBookScreen from './screens/downloadedBookScreen';
 
 
 //Screen names
@@ -18,6 +19,7 @@ const libraryName = "Biblioteca";
 const downloadsName = "Descargar";
 const bookDetailsName = "Detalles";
 const quizScreenName = "Examen";
+const downloadedBookScreenName = "DownloadedBook"
 
 //Tabs
 const Tab = createBottomTabNavigator();
@@ -44,7 +46,7 @@ const LibraryStackScreen = () => (
 const DownloadsStackScreen = () => (
   <DownloadsStack.Navigator>
     <DownloadsStack.Screen name={"Descargar "} component= {DownloadsScreen}/>
-    <DownloadsStack.Screen name={bookDetailsName} component = {BookDetailsScreen}/>
+    <DownloadsStack.Screen name={downloadedBookScreenName} component = {downloadedBookScreen}/>
   </DownloadsStack.Navigator>
 );
 
