@@ -4,6 +4,7 @@ import { View, Text, FlatList, StyleSheet, TouchableOpacity, TextInput, Activity
 import HTMLView from 'react-native-htmlview';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import downloadedbookList from '../Download_Favourite_Data/downloadedbookdata.json';
+import favoriteBookList from '../Download_Favourite_Data/downloadedbookdata.json';
 
 export default function BookDetailsScreen({ route, navigation }) {
     const [book, setBook]= useState(null);
@@ -25,7 +26,6 @@ export default function BookDetailsScreen({ route, navigation }) {
     //const addtodownloads=(element)=>{
     //    downloads.push(element)
     //}
-    //console.log(downloadedbooks)
     
     //const fs = require("fs").promises;
     
@@ -34,6 +34,11 @@ export default function BookDetailsScreen({ route, navigation }) {
     //const updateData = (data, file) =>{
 
     //}
+    // const dwns = downloadedbookList
+    // const addtodownloads=(element)=>{
+    //     dwns.push(element);
+    //     fs.writeFile('../Download_Favourite_Data/downloadedbookdata.json', JSON.stringify(dwns, null, 4))
+    // }
 
     
     if (book){
@@ -52,7 +57,7 @@ export default function BookDetailsScreen({ route, navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style ={{flex :1, alignItems: 'center',borderRightWidth: 1}}>
-                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => console.log("Download pressed")}>
+                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => {console.log("Download pressed")}}>
                             <Ionicons name="download-outline"  size = {25}/>
                             <Text>Descargar </Text>
                         </TouchableOpacity>
