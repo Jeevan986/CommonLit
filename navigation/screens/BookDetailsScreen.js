@@ -3,13 +3,15 @@ import { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, TextInput, ActivityIndicator,Image, ScrollView} from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import * as Speech from 'expo-speech';
 import downloadedbookList from '../Download_Favourite_Data/downloadedbookdata.json';
-import favoriteBookList from '../Download_Favourite_Data/downloadedbookdata.json';
+import favoriteBookList from '../Download_Favourite_Data/favouritebooks.json';
+
 
 export default function BookDetailsScreen({ route, navigation }) {
     const [book, setBook]= useState(null);
     const [product, setProduct] = useState([]);
-    const [isPress, setPress] = useState(false);
+    const [isPress,setPress] = useState(false);
     useEffect(()=> {
         let {book} = route.params;
         setBook(book)
@@ -21,25 +23,25 @@ export default function BookDetailsScreen({ route, navigation }) {
             .then((json) => setProduct(json))
             .catch((error) => console.error(error))
         },[book]);
-    
+
     //var downloads=[]
     //const addtodownloads=(element)=>{
     //    downloads.push(element)
     //}
     
-    //const fs = require("fs").promises;
+    //var fs = require("fs").promises;
     
 
 
     //const updateData = (data, file) =>{
 
     //}
-    // const dwns = downloadedbookList
-    // const addtodownloads=(element)=>{
-    //     dwns.push(element);
-    //     fs.writeFile('../Download_Favourite_Data/downloadedbookdata.json', JSON.stringify(dwns, null, 4))
-    // }
-
+    //const dwns = downloadedbookList
+    //const addtodownloads=(element)=>{
+        //dwns.push(element);
+        //fs.writeFile('/Users/jeevanbastola/Desktop/CommonLit/navigation/Download_Favourite_Data/downloadedbookdata.json', JSON.stringify(dwns, null, 4))
+    //}
+    
     
     if (book){
         return (
@@ -57,13 +59,13 @@ export default function BookDetailsScreen({ route, navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style ={{flex :1, alignItems: 'center',borderRightWidth: 1}}>
-                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => {console.log("Download pressed")}}>
+                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => {console.log("Download pressed working")}}>
                             <Ionicons name="download-outline"  size = {25}/>
                             <Text>Descargar </Text>
                         </TouchableOpacity>
                     </View>
                     <View style ={{flex :1, alignItems: 'center',borderRightWidth: 1}}>
-                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => console.log("Speak Pressed")}>
+                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => {console.log("Speak Pressed"); ;setPress(!isPress);console.log(isPress); {isPress? Speech.speak(product.html,{language:'es'}):Speech.stop()}}}>
                             <Ionicons name="volume-high-outline"  size = {25}/>
                             <Text>Hablar</Text>
                         </TouchableOpacity>
