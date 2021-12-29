@@ -4,8 +4,8 @@ import { View, Text, FlatList, StyleSheet, TouchableOpacity, TextInput, Activity
 import HTMLView from 'react-native-htmlview';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as Speech from 'expo-speech';
-import downloadedbookList from '../Download_Favourite_Data/downloadedbookdata.json';
-import favoriteBookList from '../Download_Favourite_Data/favouritebooks.json';
+import DownloadedBookList from '../Download_Favourite_Data/downloadedbookdata';
+import favoriteBookList from '../Download_Favourite_Data/favouritebooks';
 
 
 export default function BookDetailsScreen({ route, navigation }) {
@@ -93,6 +93,8 @@ export default function BookDetailsScreen({ route, navigation }) {
     }
     
 }
+
+//export DownloadedBookList;
 
 const styles={
     btnNormal: {
