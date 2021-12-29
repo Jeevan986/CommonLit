@@ -44,6 +44,8 @@ export default function BookDetailsScreen({ route, navigation }) {
 
     const speakbuttonText = isPress? "Hablar": "Detener";
     const speakbuttonIcon = isPress? "volume-off-outline":"volume-high-outline";
+    //const stateoflike = false
+    //const backgroundfavourite= stateoflike? 'red':'rgba(0,0,0,0.2)';
     
     if (book){
         return (
@@ -67,7 +69,7 @@ export default function BookDetailsScreen({ route, navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style ={{flex :1, alignItems: 'center',borderRightWidth: 1}}>
-                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => {console.log("Speak Pressed"); ;setPress(!isPress);console.log(isPress); {isPress? Speech.speak(product.html,{language:'es'}):Speech.stop()}}}>
+                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => {console.log("Speak Pressed") ;setPress(!isPress);console.log(isPress); {isPress? Speech.speak(product.html,{language:'es'}):Speech.stop()}}}>
                             <Ionicons name={speakbuttonIcon}  size = {25}/>
                             <Text>{speakbuttonText}</Text>
                         </TouchableOpacity>

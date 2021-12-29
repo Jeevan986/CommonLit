@@ -326,7 +326,7 @@ export default function quizScreen({ route, navigation }) {
      
                     {/* Background Image */}
                     <Image
-                     source={require('/Users/jeevanbastola/Desktop/CommonLit/assets/25264a.png')}
+                     source={require('/Users/jeevanbastola/Desktop/CommonLit/assets/487c84.png')}
                      style={{
                          width: SIZES.width,
                          height: 130,
