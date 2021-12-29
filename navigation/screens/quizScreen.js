@@ -127,7 +127,7 @@ export default function quizScreen({ route, navigation }) {
                 {/* Question */}
                 <Text style={{
                     color: COLORS.white,
-                    fontSize: 30
+                    fontSize: 17
                 }}>{questions[currentQuestionIndex]?.question}</Text>
             </View>
         )
@@ -158,10 +158,11 @@ export default function quizScreen({ route, navigation }) {
                             flexDirection: 'row',
                             alignItems: 'center', justifyContent: 'space-between',
                             paddingHorizontal: 20,
-                            marginVertical: 10
+                            marginVertical: 10,
+                            paddingLeft:15
                         }}
                         >
-                            <Text style={{fontSize: 20, color: COLORS.white}}>{option}</Text>
+                            <Text style={{fontSize: 15, color: COLORS.white}}>{option}</Text>
 
                             {/* Show Check Or Cross Icon based on correct answer*/}
                             {
@@ -203,7 +204,7 @@ export default function quizScreen({ route, navigation }) {
                 <TouchableOpacity
                 onPress={handleNext}
                 style={{
-                    marginTop: 20, width: '100%', backgroundColor: COLORS.accent, padding: 20, borderRadius: 5
+                    marginTop: 20, width: '100%', backgroundColor: COLORS.accent, padding: 20, borderRadius: 15
                 }}>
                     <Text style={{fontSize: 20, color: COLORS.white, textAlign: 'center'}}>Next</Text>
                 </TouchableOpacity>
@@ -244,7 +245,7 @@ export default function quizScreen({ route, navigation }) {
 
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: '1%' }}>
+        <View style={{ flex:1}}>
             {isLoading?(
             <ActivityIndicator/>
         ):(
@@ -328,8 +329,8 @@ export default function quizScreen({ route, navigation }) {
                     <Image
                      source={require('/Users/jeevanbastola/Desktop/CommonLit/assets/487c84.png')}
                      style={{
-                         width: SIZES.width,
-                         height: 130,
+                         width: '100%',
+                         height: '100%',
                          zIndex: -1,
                          position: 'absolute',
                          bottom: 0,
