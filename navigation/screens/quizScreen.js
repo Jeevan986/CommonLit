@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { View, Text, FlatList,SafeAreaView,StyleSheet, TouchableOpacity, ActivityIndicator,Image, ScrollView,Modal, Animated, StatusBar} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { set } from 'react-native-reanimated';
+import { COLORS, SIZES } from '../constants';
 
 
 export default function quizScreen({ route, navigation }) {
@@ -325,7 +326,7 @@ export default function quizScreen({ route, navigation }) {
      
                     {/* Background Image */}
                     <Image
-                     source={require('/Users/jeevanbastola/Desktop/CommonLit/assets/quiz_background.jpeg')}
+                     source={require('/Users/jeevanbastola/Desktop/CommonLit/assets/25264a.png')}
                      style={{
                          width: SIZES.width,
                          height: 130,
