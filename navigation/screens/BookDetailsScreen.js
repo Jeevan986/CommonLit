@@ -11,7 +11,7 @@ import favoriteBookList from '../Download_Favourite_Data/favouritebooks.json';
 export default function BookDetailsScreen({ route, navigation }) {
     const [book, setBook]= useState(null);
     const [product, setProduct] = useState([]);
-    const [isPress,setPress] = useState(false);
+    const [isPress,setPress] = useState(true);
     useEffect(()=> {
         let {book} = route.params;
         setBook(book)
@@ -41,7 +41,9 @@ export default function BookDetailsScreen({ route, navigation }) {
         //dwns.push(element);
         //fs.writeFile('/Users/jeevanbastola/Desktop/CommonLit/navigation/Download_Favourite_Data/downloadedbookdata.json', JSON.stringify(dwns, null, 4))
     //}
-    
+
+    const speakbuttonText = isPress? "Hablar": "Detener";
+    const speakbuttonIcon = isPress? "volume-off-outline":"volume-high-outline";
     
     if (book){
         return (
@@ -66,8 +68,8 @@ export default function BookDetailsScreen({ route, navigation }) {
                     </View>
                     <View style ={{flex :1, alignItems: 'center',borderRightWidth: 1}}>
                         <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => {console.log("Speak Pressed"); ;setPress(!isPress);console.log(isPress); {isPress? Speech.speak(product.html,{language:'es'}):Speech.stop()}}}>
-                            <Ionicons name="volume-high-outline"  size = {25}/>
-                            <Text>Hablar</Text>
+                            <Ionicons name={speakbuttonIcon}  size = {25}/>
+                            <Text>{speakbuttonText}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style ={{flex :1, alignItems: 'center'}}>

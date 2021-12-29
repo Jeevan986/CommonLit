@@ -1,16 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator,Image, ScrollView,Modal, Animated, StatusBar} from 'react-native';
-import { SafeAreaView} from 'react-native-safe-area-context';
-import { WebView } from 'react-native-webview';
-import HTMLView from 'react-native-htmlview';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { View, Text, FlatList,SafeAreaView,StyleSheet, TouchableOpacity, ActivityIndicator,Image, ScrollView,Modal, Animated, StatusBar} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { set } from 'react-native-reanimated';
 
 
 export default function quizScreen({ route, navigation }) {
     const [products, setProducts] = useState([]);
     const [questions, setQuestions] = useState([[]]);
+    const [isLoading, setLoading] = useState(true);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
     const [correctOption, setCorrectOption] = useState(null);
@@ -32,33 +30,8 @@ export default function quizScreen({ route, navigation }) {
         setProducts(products);
         var questions = products.guided_reading_questions;
         setQuestions(questions);
+        setLoading(false);
     }
-
-    //console.log("Defined")
-    //console.log("Answer question[0] kbkjbkbkjbk")
-    //console.log(questions[0])
-    
-    
-    //console.log(products.name)
-    //console.log(products.id)
-    
-    
-
-    //checking if questions list exists
-    /*
-    if (products.guided_reading_questions){
-        var questions = products.guided_reading_questions
-    }else{
-        var questions = [["error"]]
-    }
-    */
-    
-
-    //console.log("New Questions List\n")
-    //console.log(questions)
-    //console.log(questions[0].question)
-    //console.log(questions.length)
-    //console.log(questions[0].answer_options.length)
 
     
     //to get a list of answer choices
@@ -71,34 +44,306 @@ export default function quizScreen({ route, navigation }) {
             question_list
         )
     }
-   //console.log(getQuestionsList(questions[0].answer_options))
+    //console.log(getQuestionsList(questions[0].answer_options))
     
-
     //to get the correct answer
     function getCorrectanswer(elem_){
-        const correct_answer=""
+        const correct_answer=[]
         for (let i = 0; i < elem_.length; i++) {
             if(elem_[i].correct===true){
-                correct_answer = elem_[i].answer
+                correct_answer.push(elem_[i].answer)
             }
           }
         return(
-            correct_answer
+            correct_answer[0]
+        )
+    }
+    //console.log(getCorrectanswer(questions[0].answer_options))
+
+    const validateAnswer = (selectedOption) => {
+        let correct_option = getCorrectanswer(questions[currentQuestionIndex].answer_options);
+        setCurrentOptionSelected(selectedOption);
+        setCorrectOption(correct_option);
+        setIsOptionsDisabled(true);
+        if(selectedOption==correct_option){
+            // Set Score
+            setScore(score+1)
+        }
+        // Show Next Button
+        setShowNextButton(true)
+    }
+
+    const handleNext = () => {
+        if(currentQuestionIndex== questions.length-1){
+            // Last Question
+            // Show Score Modal
+            setShowScoreModal(true)
+        }else{
+            setCurrentQuestionIndex(currentQuestionIndex+1);
+            setCurrentOptionSelected(null);
+            setCorrectOption(null);
+            setIsOptionsDisabled(false);
+            setShowNextButton(false);
+        }
+        Animated.timing(progress, {
+            toValue: currentQuestionIndex+1,
+            duration: 1000,
+            useNativeDriver: false
+        }).start();
+    }
+
+    const restartQuiz = () => {
+        setShowScoreModal(false);
+
+        setCurrentQuestionIndex(0);
+        setScore(0);
+
+        setCurrentOptionSelected(null);
+        setCorrectOption(null);
+        setIsOptionsDisabled(false);
+        setShowNextButton(false);
+        Animated.timing(progress, {
+            toValue: 0,
+            duration: 1000,
+            useNativeDriver: false
+        }).start();
+    }
+
+    const renderQuestion = () => {
+        return (
+            <View style={{
+                marginVertical: 40
+            }}>
+                {/* Question Counter */}
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'flex-end'
+                }}>
+                    <Text style={{color: COLORS.white, fontSize: 20, opacity: 0.6, marginRight: 2}}>{currentQuestionIndex+1}</Text>
+                    <Text style={{color: COLORS.white, fontSize: 18, opacity: 0.6}}>/ {questions.length}</Text>
+                </View>
+
+                {/* Question */}
+                <Text style={{
+                    color: COLORS.white,
+                    fontSize: 30
+                }}>{questions[currentQuestionIndex]?.question}</Text>
+            </View>
         )
     }
 
-    //console.log(getCorrectanswer(questions[0].answer_options))
+    const renderOptions = () => {
+        return (
+            <View>
+                {
+                    getQuestionsList(questions[currentQuestionIndex]?.answer_options).map(option => (
+                        <TouchableOpacity 
+                        onPress={()=> validateAnswer(option)}
+                        disabled={isOptionsDisabled}
+                        key={option}
+                        style={{
+                            borderWidth: 3, 
+                            borderColor: option==correctOption 
+                            ? COLORS.success
+                            : option==currentOptionSelected 
+                            ? COLORS.error 
+                            : COLORS.secondary+'40',
+                            backgroundColor: option==correctOption 
+                            ? COLORS.success +'20'
+                            : option==currentOptionSelected 
+                            ? COLORS.error +'20'
+                            : COLORS.secondary+'20',
+                            height: 60, borderRadius: 20,
+                            flexDirection: 'row',
+                            alignItems: 'center', justifyContent: 'space-between',
+                            paddingHorizontal: 20,
+                            marginVertical: 10
+                        }}
+                        >
+                            <Text style={{fontSize: 20, color: COLORS.white}}>{option}</Text>
+
+                            {/* Show Check Or Cross Icon based on correct answer*/}
+                            {
+                                option==correctOption ? (
+                                    <View style={{
+                                        width: 30, height: 30, borderRadius: 30/2,
+                                        backgroundColor: COLORS.success,
+                                        justifyContent: 'center', alignItems: 'center'
+                                    }}>
+                                        <MaterialCommunityIcons name="check" style={{
+                                            color: COLORS.white,
+                                            fontSize: 20
+                                        }} />
+                                    </View>
+                                ): option == currentOptionSelected ? (
+                                    <View style={{
+                                        width: 30, height: 30, borderRadius: 30/2,
+                                        backgroundColor: COLORS.error,
+                                        justifyContent: 'center', alignItems: 'center'
+                                    }}>
+                                        <MaterialCommunityIcons name="close" style={{
+                                            color: COLORS.white,
+                                            fontSize: 20
+                                        }} />
+                                    </View>
+                                ) : null
+                            }
+
+                        </TouchableOpacity>
+                    ))
+                }
+            </View>
+        )
+    }
+
+    const renderNextButton = () => {
+        if(showNextButton){
+            return (
+                <TouchableOpacity
+                onPress={handleNext}
+                style={{
+                    marginTop: 20, width: '100%', backgroundColor: COLORS.accent, padding: 20, borderRadius: 5
+                }}>
+                    <Text style={{fontSize: 20, color: COLORS.white, textAlign: 'center'}}>Next</Text>
+                </TouchableOpacity>
+            )
+        }else{
+            return null
+        }
+    }
+
+    const [progress, setProgress] = useState(new Animated.Value(0));
+    const progressAnim = progress.interpolate({
+        inputRange: [0, questions.length],
+        outputRange: ['0%','100%']
+    })
+
+    const renderProgressBar = () => {
+        return (
+            <View style={{
+                width: '100%',
+                height: 20,
+                borderRadius: 20,
+                backgroundColor: '#00000020',
+
+            }}>
+                <Animated.View style={[{
+                    height: 20,
+                    borderRadius: 20,
+                    backgroundColor: COLORS.accent
+                },{
+                    width: progressAnim
+                }]}>
+
+                </Animated.View>
+
+            </View>
+        )
+    }
 
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: '1%' }}>
-            <Text>Quiz Screen</Text>
-            <Text>{products.name}</Text>
-            <Text>{products.id}</Text>
-            <View style= {{borderWidth: 1, borderRadius: 10}}>
-                <Text>Number 1</Text>
-                <Text>{"Question"}</Text>
-            </View>
+            {isLoading?(
+            <ActivityIndicator/>
+        ):(
+            <SafeAreaView style={{
+                flex: 1
+            }}>
+                <StatusBar barStyle="light-content" backgroundColor={COLORS.primary} />
+                <View style={{
+                    flex: 1,
+                    paddingVertical: 40,
+                    paddingHorizontal: 16,
+                    backgroundColor: COLORS.background,
+                    position:'relative'
+                }}>
+     
+                    {/* ProgressBar */}
+                    { renderProgressBar() }
+     
+                    {/* Question */}
+                    {renderQuestion()}
+     
+                    {/* Options */}
+                    {renderOptions()}
+     
+                    {/* Next Button */}
+                    {renderNextButton()}
+     
+                    {/* Score Modal */}
+                    <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={showScoreModal}
+                    >
+                        <View style={{
+                            flex: 1,
+                            backgroundColor: COLORS.primary,
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}>
+                            <View style={{
+                                backgroundColor: COLORS.white,
+                                width: '90%',
+                                borderRadius: 20,
+                                padding: 20,
+                                alignItems: 'center'
+                            }}>
+                                <Text style={{fontSize: 30, fontWeight: 'bold'}}>{ score> (questions.length/2) ? 'Congratulations!' : 'Oops!' }</Text>
+     
+                                <View style={{
+                                    flexDirection: 'row',
+                                    justifyContent: 'flex-start',
+                                    alignItems: 'center',
+                                    marginVertical: 20
+                                }}>
+                                    <Text style={{
+                                        fontSize: 30,
+                                        color: score> (questions.length/2) ? COLORS.success : COLORS.error
+                                    }}>{score}</Text>
+                                     <Text style={{
+                                         fontSize: 20, color: COLORS.black
+                                     }}>/ { questions.length }</Text>
+                                </View>
+                                {/* Retry Quiz button */}
+                                <TouchableOpacity
+                                onPress={restartQuiz}
+                                style={{
+                                    backgroundColor: COLORS.accent,
+                                    padding: 20, width: '100%', borderRadius: 20
+                                }}>
+                                    <Text style={{
+                                        textAlign: 'center', color: COLORS.white, fontSize: 20
+                                    }}>Retry Quiz</Text>
+                                </TouchableOpacity>
+     
+                            </View>
+     
+                        </View>
+                    </Modal>
+     
+                    {/* Background Image */}
+                    <Image
+                     source={require('/Users/jeevanbastola/Desktop/CommonLit/assets/quiz_background.jpeg')}
+                     style={{
+                         width: SIZES.width,
+                         height: 130,
+                         zIndex: -1,
+                         position: 'absolute',
+                         bottom: 0,
+                         left: 0,
+                         right: 0,
+                         opacity: 0.5
+                     }}
+                     resizeMode={'contain'}
+                     />
+     
+                </View>
+            </SafeAreaView>
+        )
+            }
+            
         </View>
     );
 }
