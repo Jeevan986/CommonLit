@@ -5,9 +5,21 @@ import HTMLView from 'react-native-htmlview';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Speech from 'expo-speech';
-import DownloadedBookList from '../Download_Favourite_Data/downloadedbookdata';
-import favoriteBookList from '../Download_Favourite_Data/favouritebooks';
+import * as RNFS from 'react-native-fs';
+//import DownloadedBookList from '../Download_Favourite_Data/downloadedbookdata';
+//import favoriteBookList from '../Download_Favourite_Data/favouritebooks';
 
+/*
+export function addtofavourites(val) {
+     if(val) {
+         favoriteBookList = [...favoriteBookList, val];
+      }
+    
+      return favoriteBookList;
+    }
+*/
+
+var RNFS = require('react-native-fs');
 
 export default function BookDetailsScreen({ route, navigation }) {
     const [book, setBook]= useState(null);
