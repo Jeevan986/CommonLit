@@ -75,6 +75,7 @@ function MainContainer() {
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
+        
         tabBarOptions={{
           activeTintColor: '#487c84',
           inactiveTintColor: 'grey',

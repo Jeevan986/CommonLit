@@ -30,7 +30,8 @@
     "react-native-webview": "^11.15.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@types/react-native-fs": "^2.13.0"
   },
   "private": true
 }
