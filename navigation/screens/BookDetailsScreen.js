@@ -5,6 +5,7 @@ import HTMLView from 'react-native-htmlview';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Speech from 'expo-speech';
+//import * as RNFS from 'react-native-fs';
 
 //import DownloadedBookList from '../Download_Favourite_Data/downloadedbookdata';
 //import favoriteBookList from '../Download_Favourite_Data/favouritebooks';
@@ -28,6 +29,8 @@ export default function BookDetailsScreen({ route, navigation }) {
             .then((json) => setProduct(json))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
+        //const genre = product.genres
+        //setgen(genre.join(", "))
         },[book]);
 
     const speakbuttonText = isPress? "Hablar": "Detener";
@@ -41,37 +44,38 @@ export default function BookDetailsScreen({ route, navigation }) {
             strippedHtml[0]
         )
     }
+
+    const combinegenres=(genreofbook)=>{
+        let combined=[]
+        genreofbook? 
+            combined=[" "]
+        :
+        combined=[genreofbook.join(", ")]
+        return(
+            combined
+        )
+    }
     
     if (book){
         //const genre = product.genres
         //const genretotext= genre.join(", ")
-        const combinegenres=(genreofbook)=>{
-            let combined=[]
-            genreofbook.length===1? 
-                combined=genreofbook
-            :
-            combined=[genreofbook.join(', ')]
-            return(
-                combined
-            )
-        }
 
         return (
             <View style={{ flex: 3, alignItems: 'center', margin: '2%', padding: 15}}>
                 <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={{width: 130, height: 180 , marginBottom: 5 }}/>
                 <Text style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 2, textAlign: 'center'}}>{product.name}</Text>
                 <Text style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 2 }}>Autor : {product.author} </Text>
-                <Text style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 2 }}> Genres : {product.genres}</Text>
+                <Text style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 2 }}> Genres : {product.genres} </Text>
                 <Text style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 2 }}> Grado : {product.grade_level}</Text>
                 <View style ={{flexDirection: 'row',borderWidth: 1, borderRadius: 10, paddingVertical:2, margin: 5, backgroundColor: 'rgba(0,0,0,0.2)'}}>
                     <View style ={{flex :1, alignItems: 'center', borderRightWidth: 1}}>
-                        <TouchableOpacity  style={{ alignItems: 'center'}} onPress={() => {console.log("Favourite Pressed"); console.log(favoriteBookList); setfavoritepressed(!favoritepressed)}}>
+                        <TouchableOpacity  style={{ alignItems: 'center'}} onPress={() => {console.log("Favourite Pressed"); setfavoritepressed(!favoritepressed)}}>
                             <MaterialCommunityIcons name="heart" style={{color: favoritecolor,fontSize: 25, fontWeight:'bold'}}/>
                             <Text> Favorable </Text>
                         </TouchableOpacity>
                     </View>
                     <View style ={{flex :1, alignItems: 'center',borderRightWidth: 1}}>
-                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => {console.log("Download pressed working"); console.log(product.genres)}}>
+                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={() => {console.log("Download pressed working");const gen= product.genres; console.log(gen.join(", ")); alert('Descargar exitoso..')}}>
                             <Ionicons name="download-outline"  size = {25}/>
                             <Text>Descargar </Text>
                         </TouchableOpacity>
@@ -110,8 +114,6 @@ export default function BookDetailsScreen({ route, navigation }) {
     }
     
 }
-
-//export DownloadedBookList;
 
 const styles={
     btnNormal: {

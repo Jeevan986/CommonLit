@@ -74,14 +74,17 @@ function MainContainer() {
             // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-        })}
+        }
+        )
+      }
+      
+      tabBarOptions={{
+        activeTintColor: '#487c84',
+        inactiveTintColor: 'grey',
+        labelStyle: { paddingBottom: 10, fontSize: 10 },
+        style: { padding: 10, height: 70}
+      }}>
         
-        tabBarOptions={{
-          activeTintColor: '#487c84',
-          inactiveTintColor: 'grey',
-          labelStyle: { paddingBottom: 10, fontSize: 10 },
-          style: { padding: 10, height: 70}
-        }}>
 
         <Tab.Screen name={homeName} component={HomeStackScreen} options={{title: "Inicio", headerShown:false}}/>
         <Tab.Screen name={libraryName} component={LibraryStackScreen} options={{title: "Biblioteca", headerShown:false}}/>

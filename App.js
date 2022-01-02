@@ -1,3 +1,4 @@
+import { registerRootComponent } from 'expo';
 import * as React from 'react';
 import MainContainer from './navigation/MainContainer';
 
@@ -6,5 +7,4 @@ function App() {
     <MainContainer/>
   );
 }
-
 export default App;
