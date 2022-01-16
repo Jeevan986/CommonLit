@@ -5,7 +5,7 @@ import HTMLView from 'react-native-htmlview';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Speech from 'expo-speech';
-//import * as RNFS from 'react-native-fs';
+import * as FileSystem from 'expo-file-system';
 
 //import DownloadedBookList from '../Download_Favourite_Data/downloadedbookdata';
 //import favoriteBookList from '../Download_Favourite_Data/favouritebooks';
