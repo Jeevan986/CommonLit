@@ -1,5 +1,5 @@
-export const rows =[
-    [{
+export const row1 =[
+        {
         "id": 7110,
         "name": "Redondillas"
         },
@@ -46,8 +46,9 @@ export const rows =[
         {
         "id": 1011,
         "name": "Un gran científico: Arquímedes de Siracusa"
-        }],
-    [{
+        }]
+
+ export const row2=[{
         "id": 1038,
         "name": "Un gran astrónomo: Nicolás Copérnico"
         },
@@ -106,8 +107,9 @@ export const rows =[
         {
         "id": 2383,
         "name": "Un gran escritor: William Shakespeare"
-        }],
-    [{
+        }]
+
+export const row3=[{
         "id": 2393,
         "name": "Un gran futbolista: Pelé"
         },
@@ -162,5 +164,4 @@ export const rows =[
         {
         "id": 1004,
         "name": "Hansel y Gretel"
-        }]
-];
+        }];
