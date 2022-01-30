@@ -27,4 +27,4 @@ export const downloads=[
         "id": 7168,
         "name": "Palenque: ¡Juguemos a la pelota!"
         }
-]
+];
