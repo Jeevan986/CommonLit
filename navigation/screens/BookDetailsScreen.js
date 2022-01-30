@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Speech from 'expo-speech';
 import * as FileSystem from 'expo-file-system';
-
+import {link_cl} from '../Download_Favourite_Data/links';
 //import DownloadedBookList from '../Download_Favourite_Data/downloadedbookdata';
 //import favoriteBookList from '../Download_Favourite_Data/favouritebooks';
 
@@ -23,7 +23,7 @@ export default function BookDetailsScreen({ route, navigation }) {
         setBook(book)
         const book_id_int = book.id
         const book_id_str = book_id_int.toString();
-        const bookDetailURL="https://www.commonlit.org/api/v1/raw_content/lesson_templates"+"/"+book_id_str+"?token=9759826c246d687a67328c4c81811bb108821e41af3c42ce41e6ff28ebf8bbba9737947232dd64e32df99a54a0add95c498001d917ca96258d50444af256a2dc";
+        const bookDetailURL=link_cl[0]+"/"+book_id_str+link_cl[1];
         fetch(bookDetailURL)
             .then((response) => response.json())
             .then((json) => setProduct(json))

@@ -1,0 +1,1 @@
+export const link_cl=["https://www.commonlit.org/api/v1/raw_content/lesson_templates","?token=9759826c246d687a67328c4c81811bb108821e41af3c42ce41e6ff28ebf8bbba9737947232dd64e32df99a54a0add95c498001d917ca96258d50444af256a2dc"]
