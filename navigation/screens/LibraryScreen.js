@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, TextInput, ActivityIndicator,Image} from 'react-native';
 import { SafeAreaView,ScrollView } from 'react-native-safe-area-context';
 import { SearchBar } from 'react-native-screens';
+import {link_cl} from '../Download_Favourite_Data/links';
 
-const booksURL="https://www.commonlit.org/api/v1/raw_content/lesson_templates?token=9759826c246d687a67328c4c81811bb108821e41af3c42ce41e6ff28ebf8bbba9737947232dd64e32df99a54a0add95c498001d917ca96258d50444af256a2dc";
+const booksURL=link_cl[0]+link_cl[1];
 export default function LibraryScreen({ navigation }) {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
