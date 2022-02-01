@@ -9,7 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-Download_Favourite_Data/links.js
+Downloaded_Favorite_Data/links
 
 # macOS
 .DS_Store
